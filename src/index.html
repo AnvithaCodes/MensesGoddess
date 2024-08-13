@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MensesGoddess - Period Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>MensesGoddess</h1>
+        <p>Track your menstrual cycle with ease.</p>
+    </header>
+
+    <main>
+        <section id="tracker">
+            <h2>Track Your Period</h2>
+            <form id="period-form">
+                <label for="start-date">Start Date:</label>
+                <input type="date" id="start-date" name="start-date" required>
+                
+                <label for="end-date">End Date:</label>
+                <input type="date" id="end-date" name="end-date" required>
+                
+                <button type="submit">Save Period</button>
+            </form>
+        </section>
+
+        <section id="history">
+            <h2>Period History</h2>
+            <ul id="history-list">
+                <!-- List of tracked periods will appear here -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 MensesGoddess. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts/app.js"></script>
+</body>
+</html>
