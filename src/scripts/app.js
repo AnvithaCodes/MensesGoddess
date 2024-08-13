@@ -65,3 +65,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarEl = document.getElementById('calendar');
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'month',
+        events: getSavedPeriodEvents() // Function to get period data from localStorage
+    });
+
+    calendar.render();
+
+    function getSavedPeriodEvents() {
+        const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
+        return savedData.map(period => ({
+            start: period.startDate,
+            end: period.endDate,
+            backgroundColor: 'lightpink',
+            borderColor: 'lightpink'
+        }));
+    }
+});
+function formatDate(date) {
+    const d = new Date(date);
+    return d.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
+}
