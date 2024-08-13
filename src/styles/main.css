@@ -56,7 +56,7 @@ footer {
 
 #history-list {
     max-height: 200px; /* Maximum height before scrolling */
-    overflow-y: auto;  /* Enable vertical scrollbar */
+    overflow-y: scroll;  /* Enable vertical scrollbar */
     padding: 0;
     margin: 0; /* Reset margin for list */
     list-style-type: none; /* Remove default list style */
