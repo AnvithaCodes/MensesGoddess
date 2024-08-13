@@ -54,7 +54,16 @@ footer {
     bottom: 0;
 }
 
+/* Calendar Styles */
 #calendar {
     max-width: 900px;
-    margin: 0 auto;
+    margin: 2em auto; /* Adjust margin to give space around the calendar */
+    padding: 1em; /* Add padding if needed */
+    background-color: #fff; /* Ensure background color to improve visibility */
+    border: 1px solid #ddd; /* Add border to make it distinct */
+}
+
+/* FullCalendar specific styles */
+.fc {
+    font-size: 14px; /* Adjust font size if needed */
 }
