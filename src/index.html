@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MensesGoddess - Period Tracker</title>
     <link rel="stylesheet" href="styles/main.css">
+    <!-- FullCalendar CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.css" rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -33,6 +35,11 @@
                 <!-- List of tracked periods will appear here -->
             </ul>
         </section>
+
+        <section id="calendar-container">
+            <h2>Period Calendar</h2>
+            <div id="calendar"></div>
+        </section>
     </main>
 
     <footer>
@@ -41,21 +48,17 @@
         
         <h3 align="left">Connect with me:</h3>
         <p align="left">
-        <a href="https://www.linkedin.com/in/anvitha-bhat-a-6425a3316/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Anvitha Bhat A" height="30" width="40" /></a>
+        <a href="https://www.linkedin.com/in/anvitha-bhat-a-6425a3316/" target="_blank">
+            <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Anvitha Bhat A" height="30" width="40" />
+        </a>
         </p>
     </footer>
 
+    <!-- FullCalendar JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.js"></script>
+    <!-- Existing JavaScript -->
     <script src="scripts/app.js"></script>
-
-
-    <!-- FullCalendar CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.css" rel="stylesheet" />
-
-<!-- FullCalendar JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.0/main.min.js"></script>
-
-<div id="calendar"></div>
-
-
+    <!-- Calendar initialization -->
+    <script src="scripts/calendar.js"></script>
 </body>
 </html>
