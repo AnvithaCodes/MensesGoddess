@@ -17,3 +17,14 @@ node_modules/
 # Build output
 dist/
 build/
+
+# Dependencies
+package-lock.json
+yarn.lock
+
+# Coverage reports
+coverage/
+
+# Temporary files
+*.tmp
+*.swp
