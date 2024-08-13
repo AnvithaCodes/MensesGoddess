@@ -1,5 +1,5 @@
 // src/scripts/app.js
-/*
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('period-form');
     const historyList = document.getElementById('history-list');
@@ -26,9 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 localStorage.setItem('periodHistory', JSON.stringify(periodData));
 
 // Retrieve data from localStorage
-const savedData = JSON.parse(localStorage.getItem('periodHistory')); */
+const savedData = JSON.parse(localStorage.getItem('periodHistory')); 
 
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('period-form');
     const historyList = document.getElementById('history-list');
 
@@ -64,4 +64,4 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Please fill in both dates.');
         }
     });
-});
+}); */
