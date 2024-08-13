@@ -42,13 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
     calendar.render();
 
     function getSavedPeriodEvents() {
-        const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
-        return savedData.map(period => ({
-            start: period.startDate,
-            end: period.endDate,
-            backgroundColor: 'lightpink',
-            borderColor: 'lightpink',
-        }));
+        try {
+            const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
+            return savedData.map(period => ({
+                start: period.startDate,
+                end: period.endDate,
+                backgroundColor: 'lightpink',
+                borderColor: 'lightpink',
+            }));
+        } catch (error) {
+            console.error('Error loading period events from localStorage:', error);
+            return [];
+        }
     }
 
     // Load saved data from localStorage and display it
