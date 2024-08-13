@@ -31,6 +31,25 @@ const savedData = JSON.parse(localStorage.getItem('periodHistory')); */
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('period-form');
     const historyList = document.getElementById('history-list');
+    const calendarEl = document.getElementById('calendar');
+
+    // Initialize FullCalendar
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'month',
+        events: getSavedPeriodEvents(), // Function to get period data from localStorage
+    });
+
+    calendar.render();
+
+    function getSavedPeriodEvents() {
+        const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
+        return savedData.map(period => ({
+            start: period.startDate,
+            end: period.endDate,
+            backgroundColor: 'lightpink',
+            borderColor: 'lightpink',
+        }));
+    }
 
     // Load saved data from localStorage and display it
     const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
@@ -58,6 +77,14 @@ document.addEventListener('DOMContentLoaded', () => {
             existingData.push(periodData);
             localStorage.setItem('periodHistory', JSON.stringify(existingData));
 
+            // Update the calendar with new data
+            calendar.addEvent({
+                start: startDate,
+                end: endDate,
+                backgroundColor: 'lightpink',
+                borderColor: 'lightpink'
+            });
+
             // Clear the form inputs
             form.reset();
         } else {
@@ -65,28 +92,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-    const calendarEl = document.getElementById('calendar');
-
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'month',
-        events: getSavedPeriodEvents() // Function to get period data from localStorage
-    });
-
-    calendar.render();
-
-    function getSavedPeriodEvents() {
-        const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
-        return savedData.map(period => ({
-            start: period.startDate,
-            end: period.endDate,
-            backgroundColor: 'lightpink',
-            borderColor: 'lightpink'
-        }));
-    }
-});
-function formatDate(date) {
-    const d = new Date(date);
-    return d.toISOString().split('T')[0]; // Returns date in YYYY-MM-DD format
-}
