@@ -92,3 +92,15 @@ footer {
 #updates button:hover {
     background-color: #0056b3;
 }
+
+/* Calendar Styles */
+#calendar {
+    max-width: 900px;
+    margin: 2em auto;
+}
+
+.highlighted {
+    background-color: #ffcccb; /* Light pink color */
+    border-radius: 50%;
+    padding: 5px;
+}
