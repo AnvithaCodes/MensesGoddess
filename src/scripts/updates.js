@@ -1,16 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
-    
-    if (savedData.length > 0) {
-        const lastPeriod = savedData[savedData.length - 1];
-        const lastPeriodEndDate = new Date(lastPeriod.endDate);
+    // Retrieve period history from localStorage
+    const periodHistory = JSON.parse(localStorage.getItem('periodHistory')) || [];
 
-        // Assuming a 28-day cycle for prediction
-        const nextPeriodDate = new Date(lastPeriodEndDate);
-        nextPeriodDate.setDate(nextPeriodDate.getDate() + 28);
+    // Check if there's any period data available
+    if (periodHistory.length > 0) {
+        // Get the most recent period (last entry in the array)
+        const lastPeriod = periodHistory[periodHistory.length - 1];
+        const lastEndDate = new Date(lastPeriod.endDate);
 
-        document.getElementById('next-period-date').textContent = nextPeriodDate.toDateString();
+        // Assuming an average cycle length of 28 days
+        const averageCycleLength = 28;
+
+        // Calculate the next predicted period date
+        const nextPeriodDate = new Date(lastEndDate);
+        nextPeriodDate.setDate(nextPeriodDate.getDate() + averageCycleLength);
+
+        // Display the predicted date on the page
+        const predictionElement = document.getElementById('prediction');
+        predictionElement.textContent = `Your next period is expected to start on ${nextPeriodDate.toDateString()}.`;
     } else {
-        document.getElementById('next-period-date').textContent = "Input your last period date to predict the next date";
+        // If there's no data, display a message
+        const predictionElement = document.getElementById('prediction');
+        predictionElement.textContent = 'No period data is available to predict your next period.';
     }
 });
+
