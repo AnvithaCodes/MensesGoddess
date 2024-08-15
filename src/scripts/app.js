@@ -111,11 +111,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('period-form');
     const historyList = document.getElementById('history-list');
 
+    // Function to render the history in chronological order
+    function renderHistory(data) {
+        historyList.innerHTML = ''; // Clear the existing list
+        data.sort((a, b) => new Date(a.startDate) - new Date(b.startDate)); // Sort by start date
+
+        data.forEach((period, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `From ${period.startDate} to ${period.endDate}`;
+
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => editPeriod(index));
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => deletePeriod(index));
+
+            listItem.appendChild(editButton);
+            listItem.appendChild(deleteButton);
+
+            historyList.appendChild(listItem);
+        });
+    }
+
     // Load saved data from localStorage and display it
     const savedData = JSON.parse(localStorage.getItem('periodHistory')) || [];
-    savedData.forEach((period, index) => {
-        addPeriodToHistory(period, index);
-    });
+    renderHistory(savedData);
 
     form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -124,42 +146,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const endDate = document.getElementById('end-date').value;
         
         if (startDate && endDate) {
+            // Save the period data to localStorage
             const periodData = { startDate, endDate };
             const existingData = JSON.parse(localStorage.getItem('periodHistory')) || [];
             existingData.push(periodData);
             localStorage.setItem('periodHistory', JSON.stringify(existingData));
-            addPeriodToHistory(periodData, existingData.length - 1);
 
+            // Render the updated history
+            renderHistory(existingData);
+
+            // Clear the form inputs
             form.reset();
         } else {
             alert('Please fill in both dates.');
         }
     });
 
-    function addPeriodToHistory(period, index) {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `From ${period.startDate} to ${period.endDate} 
-            <button onclick="editPeriod(${index})">Edit</button>
-            <button onclick="deletePeriod(${index})">Delete</button>`;
-        historyList.appendChild(listItem);
-    }
+    // Edit period entry
+    function editPeriod(index) {
+        const existingData = JSON.parse(localStorage.getItem('periodHistory'));
+        const period = existingData[index];
 
-    window.editPeriod = (index) => {
-        const savedData = JSON.parse(localStorage.getItem('periodHistory'));
-        const period = savedData[index];
         document.getElementById('start-date').value = period.startDate;
         document.getElementById('end-date').value = period.endDate;
 
-        deletePeriod(index);
-    };
+        // Remove the old entry and update localStorage
+        existingData.splice(index, 1);
+        localStorage.setItem('periodHistory', JSON.stringify(existingData));
 
-    window.deletePeriod = (index) => {
-        let savedData = JSON.parse(localStorage.getItem('periodHistory'));
-        savedData.splice(index, 1);
-        localStorage.setItem('periodHistory', JSON.stringify(savedData));
-        historyList.innerHTML = ''; // Clear the list
-        savedData.forEach((period, i) => addPeriodToHistory(period, i)); // Re-render the list
-    };
+        // Render the updated history
+        renderHistory(existingData);
+    }
+
+    // Delete period entry
+    function deletePeriod(index) {
+        const existingData = JSON.parse(localStorage.getItem('periodHistory'));
+        existingData.splice(index, 1);
+        localStorage.setItem('periodHistory', JSON.stringify(existingData));
+
+        // Render the updated history
+        renderHistory(existingData);
+    }
 });
-
 
