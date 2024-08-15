@@ -11,6 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('next-period-date').textContent = nextPeriodDate.toDateString();
     } else {
-        document.getElementById('next-period-date').textContent = "No data available to predict.";
+        document.getElementById('next-period-date').textContent = "Input your last period date to predict the next date";
     }
 });
